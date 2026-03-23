@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Linux Basics for Hackers Command Reference</title>
+  <style>
+    :root{--bg:#f5efe4;--panel:#fffaf2;--ink:#1f1a14;--muted:#665d52;--accent:#0d6a51;--soft:#dceee7;--line:#d7cdbf;--code:#1f2937;--radius:20px}
+    *{box-sizing:border-box} body{margin:0;font-family:Georgia,"Times New Roman",serif;color:var(--ink);background:linear-gradient(180deg,#f8f2e8,#f3eadb)}
+    .wrap{width:min(1320px,calc(100% - 28px));margin:auto;padding:24px 0 32px}
+    .hero,.main{display:grid;gap:22px}.hero{grid-template-columns:1.2fr .8fr}.main{grid-template-columns:380px 1fr}
+    .card{background:rgba(255,250,242,.94);border:1px solid rgba(255,255,255,.7);box-shadow:0 18px 45px rgba(54,40,18,.11);border-radius:var(--radius)}
+    .hero-card,.side-card,.browser,.detail{padding:24px}
+    .eyebrow,.tag{display:inline-flex;padding:7px 12px;border-radius:999px;background:var(--soft);color:#0b4c3a;font-size:.8rem;text-transform:uppercase;letter-spacing:.08em}
+    h1,h2,h3{margin:0} h1{font-size:clamp(2.2rem,5vw,4.2rem);line-height:.95;max-width:10ch;margin-top:16px}
+    p{margin:0} .lead{margin-top:16px;color:var(--muted);line-height:1.7;max-width:64ch}
+    .stats{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}.stat{padding:12px 15px;border:1px solid var(--line);border-radius:16px;background:var(--panel);min-width:130px}.stat strong{display:block;color:#0b4c3a;font-size:1.25rem}
+    .side-card{display:grid;gap:12px;align-content:start}.note{padding:14px;border:1px solid var(--line);border-radius:16px;background:var(--panel)} .note strong{display:block;margin-bottom:6px}
+    .toolbar{display:grid;gap:12px;margin-bottom:18px}.label{font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+    input,select{width:100%;padding:14px 15px;border-radius:14px;border:1px solid var(--line);font:inherit;background:var(--panel);color:var(--ink)}
+    .list{display:grid;gap:10px;max-height:76vh;overflow:auto;padding-right:4px}.cmd{width:100%;text-align:left;padding:15px;border-radius:16px;border:1px solid var(--line);background:var(--panel);cursor:pointer}
+    .cmd:hover,.cmd:focus-visible,.cmd.active{border-color:rgba(13,106,81,.45);outline:none;transform:translateY(-1px)} .cmdname{display:flex;justify-content:space-between;gap:12px;font-weight:700;margin-bottom:6px}
+    .summary{color:var(--muted);line-height:1.5;font-size:.94rem}.detail-head{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+    .big{font-size:clamp(2rem,4vw,3.2rem);line-height:1}.desc{margin:14px 0 20px;color:var(--muted);line-height:1.75;max-width:72ch}
+    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-bottom:18px}.box{padding:18px;border:1px solid var(--line);border-radius:18px;background:var(--panel)}
+    .box h3{margin-bottom:10px;font-size:1rem}.box ul{margin:0;padding-left:18px}.box li,.box p{color:var(--muted);line-height:1.65}
+    pre{margin:0;padding:14px 16px;background:var(--code);color:#f9fafb;border-radius:16px;overflow:auto;line-height:1.55}
+    .examples{display:grid;gap:14px}.example{padding:18px;border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,rgba(255,255,255,.4),rgba(255,250,242,.98))}.example strong{display:block;margin-bottom:10px}.example p{margin-top:10px;color:var(--muted);line-height:1.65}
+    .empty,.foot{padding:18px;border-radius:18px;background:var(--panel);border:1px dashed var(--line);color:var(--muted);line-height:1.7}.foot{margin-top:18px;color:#8a5a08}
+    @media (max-width:1080px){.hero,.main,.grid{grid-template-columns:1fr}.list{max-height:none}}
+    @media (max-width:720px){.wrap{width:min(100% - 18px,1320px);padding-top:18px}.hero-card,.side-card,.browser,.detail{padding:18px}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="hero">
+      <article class="card hero-card">
+        <span class="eyebrow">Reference Manual</span>
+        <h1>Linux Basics for Hackers Reference</h1>
+        <p class="lead">This page groups commands chapter-wise and makes each command clickable. Select any command to read its syntax, what it does, important flags, and practical examples drawn from the book's command-oriented lessons.</p>
+        <div class="stats">
+          <div class="stat"><strong id="unitCount">0</strong><span>Units</span></div>
+          <div class="stat"><strong id="commandCount">0</strong><span>Commands</span></div>
+          <div class="stat"><strong>Interactive</strong><span>Click for details</span></div>
+        </div>
+      </article>
+      <aside class="card side-card">
+        <div>
+          <h2>Use</h2>
+          <p class="lead" style="margin-top:10px">Search by command name or topic, filter by unit, then click any command card. The details panel updates instantly.</p>
+        </div>
+        <div class="note"><strong>Chapter-wise study</strong>Commands are grouped by lesson so the page works like a book companion.</div>
+        <div class="note"><strong>Detailed reference</strong>Every command includes syntax, common usages, and examples.</div>
+        <div class="note"><strong>Easy to expand</strong>You can add more commands by editing the `data` array inside this file.</div>
+      </aside>
+    </section>
+    <section class="main">
+      <aside class="card browser">
+        <div class="toolbar">
+          <div><div class="label">Search</div><input id="search" type="search" placeholder="Search command, usage, or flag"></div>
+          <div><div class="label">Unit</div><select id="unit"></select></div>
+        </div>
+        <div class="label">Commands</div>
+        <div id="list" class="list"></div>
+      </aside>
+      <section id="detail" class="card detail"></section>
+    </section>
+  </main>
+  <script src="linux_basics_for_hackers_data.js"></script>
+  <script>
+    const data = window.commandUnits || [];
+    const search = document.getElementById("search");
+    const unit = document.getElementById("unit");
+    const list = document.getElementById("list");
+    const detail = document.getElementById("detail");
+    const unitCount = document.getElementById("unitCount");
+    const commandCount = document.getElementById("commandCount");
+    const flat = data.flatMap(section => section.items.map(item => ({...item, unit: section.unit})));
+    let active = flat[0]?.command || "";
+    const esc = s => s.replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;");
+    function setup() {
+      unitCount.textContent = data.length;
+      commandCount.textContent = flat.length;
+      unit.innerHTML = `<option value="all">All Units</option>` + data.map(x => `<option value="${esc(x.unit)}">${esc(x.unit)}</option>`).join("");
+      render();
+    }
+    function filtered() {
+      const q = search.value.trim().toLowerCase();
+      const u = unit.value;
+      return flat.filter(item => {
+        const inUnit = u === "all" || item.unit === u;
+        const blob = [item.command, item.summary, item.syntax, item.purpose, ...item.usages, ...item.flags].join(" ").toLowerCase();
+        return inUnit && blob.includes(q);
+      });
+    }
+    function render() {
+      const items = filtered();
+      if (!items.some(x => x.command === active)) active = items[0]?.command || "";
+      list.innerHTML = items.length ? items.map(item => `
+        <button class="cmd${item.command===active?" active":""}" data-cmd="${esc(item.command)}">
+          <div class="cmdname"><span>${esc(item.command)}</span><span class="tag">${esc(item.unit.replace("Chapter ","Ch "))}</span></div>
+          <div class="summary">${esc(item.summary)}</div>
+        </button>`).join("") : `<div class="empty">No command matched the current filters.</div>`;
+      [...list.querySelectorAll(".cmd")].forEach(btn => btn.addEventListener("click", () => { active = btn.dataset.cmd; render(); }));
+      renderDetail(items.find(x => x.command === active) || null);
+    }
+    function renderDetail(item) {
+      if (!item) { detail.innerHTML = `<div class="empty">Select a command to inspect its syntax, flags, and examples.</div>`; return; }
+      detail.innerHTML = `
+        <div class="detail-head"><span class="tag">${esc(item.unit)}</span><span class="tag">Command Reference</span></div>
+        <h2 class="big">${esc(item.command)}</h2>
+        <p class="desc">${esc(item.purpose)}</p>
+        <div class="grid">
+          <article class="box"><h3>Basic Syntax</h3><pre><code>${esc(item.syntax)}</code></pre></article>
+          <article class="box"><h3>What It Does</h3><p>${esc(item.summary)}</p></article>
+          <article class="box"><h3>Common Usages</h3><ul>${item.usages.map(x => `<li>${esc(x)}</li>`).join("")}</ul></article>
+          <article class="box"><h3>Important Flags / Notes</h3><ul>${item.flags.map(x => `<li>${esc(x)}</li>`).join("")}</ul></article>
+        </div>
+        <h3 style="margin-bottom:14px">Examples</h3>
+        <div class="examples">${item.examples.map(ex => `<section class="example"><strong>${esc(ex.title)}</strong><pre><code>${esc(ex.code)}</code></pre><p>${esc(ex.explanation)}</p></section>`).join("")}</div>
+        <div class="foot">This reference is organized around the chapter structure of Linux Basics for Hackers and focuses on the command-driven lessons. Chapter coverage is reconstructed from the published table of contents and chapter topics, so edition-specific examples can still vary slightly.</div>`;
+    }
+    search.addEventListener("input", render);
+    unit.addEventListener("change", render);
+    setup();
+  </script>
+</body>
+</html>
