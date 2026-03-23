@@ -10,7 +10,7 @@ This project transforms traditional learning into a **clickable, searchable, and
 ##  Live Demo
 
 👉 Add your deployed link here
-`https://SUJITHCHALLA12.github.io/linux-cheatsheet/`
+`https://sujithchalla12.github.io/linux-cheatsheet/`
 
 ---
 
