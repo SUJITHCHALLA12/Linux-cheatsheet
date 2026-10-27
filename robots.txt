@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://linux-cheatsheet-for-beginners.vercel.app/sitemap.xml
